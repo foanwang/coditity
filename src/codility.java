@@ -1,5 +1,3 @@
-package codility;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -162,22 +160,91 @@ public class codility {
 		return -1;
     }
 
-	public int[] MaxCounters(int X, int[] A) {
-		Set<Integer> temp = new HashSet<Integer>();
-		for(int i = 1;i <=X; i++) {
-			temp.add(i);
+	public int[] MaxCounters(int N, int[] A) {
+		int[] reply=  new int[N];
+		for(int i = 0;i < N;i++) {
+			reply[i] = 0;
 		}
-		for(int i = 0;i < A.length; i++) {
-			temp.remove(A[i]);
-			if(temp.size() == 0) {
-				return i;
+		int max = 0;
+		int lastmax = 0;
+		for(int i = 0; i < A.length;i++) {
+			if (1<= A[i] && A[i] <=N) {
+				reply[A[i] - 1] =  Math.max(reply[A[i] - 1], lastmax);
+				reply[A[i] - 1] += 1;
+				max = Math.max(max, reply[A[i] - 1]);
+	 		}else if (A[i]==N+1) {
+	 			lastmax = max;
 			}
 		}
-		return -1;
+		for(int i = 0; i < reply.length;i++) {
+			reply[i] = Math.max(reply[i], lastmax);
+		}
+		return reply;
     }
+	
+	public int MissingInteger(int[] A) {
+		
+		Set<Integer> temp = new HashSet<Integer>();
+		for(int i = 0;i < A.length;i++) {
+			temp.add(A[i]);
+		}
+		
+		for(int i = 0;i <A.length;i++) {
+			if (temp.contains(i+1)!=true) {
+				return i+1;
+			}
+		}
+		return A.length+1;
+    }
+
+	public int PassingCars(int[] A) {
+		
+		return 1;
+    }
+	public int[] GenomicRangeQuery(String S, int[] P, int[] Q) {
+		int M = 0;
+		if(P.length !=  Q.length) {
+			return null;
+		}
+		
+		M  =  P.length;
+		int [] reply =  new int[M];
+		for(int i = 0; i < M;i++) {
+			reply[i] = checkRange(S.substring(P[i], Q[i]+1));
+//			System.out.print("reply["+i+"]: " +checkRange(temp));
+		}
+//		for(int i =0; i < reply.length;i++) {
+//			System.out.print("reply["+i+"]: " +reply[i]+" ");
+//		}
+		return reply;
+    }
+	
+	public int checkRange(String Str) {
+		Set<Character> check = new HashSet<Character>();
+		for(int i = 0; i < Str.length(); i++) {
+			check.add(Str.charAt(i));
+		}
+//		for(Character temp : check) {
+//			System.out.println("char:"+temp);
+//		}
+		if(check.contains('A')){
+			return 1;
+		}else if(check.contains('C')){
+			return 2;
+		}else if(check.contains('G')){
+			return 3;
+		}else {
+			return 4;
+		}
+	}
+	
+	
+
+	
 	public static void main(String[] args) {
 		codility temp = new codility();
-		System.out.println("reply:"+temp.FrogRiverOne(5, new int[]{1, 3, 1, 4, 2, 3, 5, 4}));
+		System.out.println("reply:"+temp.GenomicRangeQuery("CAGCCTA", new int[] {2, 5, 0}, new int[] {4, 5, 6}));
+				
 
 	}
 
