@@ -69,9 +69,11 @@ public class leecode {
     
     public int hammingDistance(int x, int y) {
     	int reply = 0;
-    	String strx = Integer.toBinaryString(x);
-    	String stry = Integer.toBinaryString(y);
-    	
+		int value = x ^ y;
+		while(value != 0) {
+			count+=1;
+			value &= value -1;
+		}
     	return reply;
     }
     
@@ -96,10 +98,6 @@ public class leecode {
 	public static void main(String[] args) {
 		leecode temp = new leecode();
 		Integer[] intarry = new Integer[]{3,1,2,4};
-		//ShowfunctionForInt(temp.sortArrayByParity(new int[]{3,1,2,4}));
-		int x = 3 ^ 4;
-		System.out.println("reply:"+x);
-		System.out.println("reply:"+Integer.toBinaryString(200222));
-		
+		System.out.println("reply:"+hammingDistance(1, 4));
 	}
 }
