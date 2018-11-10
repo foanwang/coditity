@@ -68,15 +68,56 @@ public class leecode {
     }
     
     public int hammingDistance(int x, int y) {
-    	int reply = 0;
+    	int count = 0;
 		int value = x ^ y;
 		while(value != 0) {
 			count+=1;
 			value &= value -1;
 		}
-    	return reply;
+    	return count;
     }
     
+    public class TreeNode {
+    	int val;
+    	TreeNode left;
+    	TreeNode right;
+    	TreeNode(int x) { val = x; }
+    }
+    
+    
+    
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+    	if(t1 == null & t2 ==null) {
+    		return null;
+    	}
+    	t1.left = mergeTrees(t1.left == null? null: t1.left, t2.left == null?null:t2.left);
+    	t1.right = mergeTrees(t1.right == null? null: t1.right, t2.right == null?null:t2.right);
+    	
+    	return t1;
+    
+    }
+    
+    
+   	public List<Integer> selfDividingNumbers(int left, int right) {
+   		List<Integer> selflist = new ArrayList<Integer>();
+   		for(int i = left; i <= right; i++) {
+   			int quot = i;//商
+   			int flag = 1;
+   			while(quot > 0 && flag == 1) {
+   				int target = i % 10;//餘數
+   				if(target != 0 && (i % target) == 0){
+   					quot /= 10;
+   					target = quot%10;
+   				}else{
+   					flag = 0;
+   				}
+   			}
+   			if(flag ==1) {
+   				selflist.add(i);
+   			}
+   		}
+   		return selflist;
+    }
     
     
     public static void ShowfunctionForInt(int[] input) {
@@ -98,6 +139,6 @@ public class leecode {
 	public static void main(String[] args) {
 		leecode temp = new leecode();
 		Integer[] intarry = new Integer[]{3,1,2,4};
-		System.out.println("reply:"+hammingDistance(1, 4));
+		System.out.println("reply:"+temp.selfDividingNumbers(1, 22));
 	}
 }
