@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 public class leecode {
-	
+   
 	public int numJewelsInStones(String J, String S) {
         int reply = 0;
         Set<Character> jset = new HashSet<Character>();
@@ -75,16 +75,7 @@ public class leecode {
 			value &= value -1;
 		}
     	return count;
-    }
-    
-    public class TreeNode {
-    	int val;
-    	TreeNode left;
-    	TreeNode right;
-    	TreeNode(int x) { val = x; }
-    }
-    
-    
+    }    
     
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
     	if(t1 == null & t2 ==null) {
@@ -183,33 +174,67 @@ public class leecode {
    		}
    		return list;
    	}
-   	
+   	List<Integer> reply = new ArrayList<Integer>();
     public List<Integer> postorder(Node root) {
-    	List<Integer> reply = new ArrayList<Integer>();
+    
    		if(root==null) {
    			return reply;
    		}
-   		List<Node> childrenlist =root.children;
-   		for(int i  = 0; i < childrenlist.size(); i++) {
-   			reply = addValueBypreorder(childrenlist.get(i), reply);
+   		for(Node node: root.children){
+   			postorder(node);
    		}
    		reply.add(root.val);
    		return reply;
     }
     
-	public List<Integer> addValueByPostorder(Node root, List<Integer> list){
-   		if(root==null) {
-   			return list;
-   		}
-   		if(root.children==null) {
-   			list.add(root.val);
-   		}else{
-			for(int i  = 0; i < root.children.size(); i++) {
-				list = addValueByPostorder(root.children.get(i), list);
-			}
-   		}
-   		return list;
-   	}
+    public TreeNode searchBST(TreeNode root, int val) {
+    	if(root == null){
+    		return null;
+    	}
+    	if (root.val == val ) {
+    		return root;
+    	}
+    	TreeNode reply = searchBST(root.left, val);
+    	if(reply == null) {
+    		return searchBST(root.right, val);
+    	}else {
+    		return reply;
+    	}
+    	
+    }
+    
+    public ListNode middleNode(ListNode head) {
+    	if(head ==  null) {
+    		return null;
+    	}
+    	int count = 1;
+    	ListNode next= head;
+    	while(next!=null) {
+    		count+=1;
+    		next =  next.next;
+    	}
+    	ListNode reply = head;
+    	int mid = count/2;
+    	while(count>0){
+    		count-=1;
+    		reply = reply.next;
+    	}
+    	
+    	return reply;
+    }
+ 
+    public class TreeNode {
+    	int val;
+    	TreeNode left;
+    	TreeNode right;
+    	TreeNode(int x) { val = x; }
+    }
+	
+    public class ListNode {
+    	int val;
+    	ListNode next;
+    	ListNode(){};    	ListNode(int x) { val = x; }
+    }
    	
     public static void ShowfunctionForInt(int[] input) {
     	int count = 0;
@@ -230,6 +255,8 @@ public class leecode {
 	public static void main(String[] args) {
 		leecode temp = new leecode();
 		Integer[] intarry = new Integer[]{3,1,2,4};
-		//ShowfunctionForInt(temp.sortArrayByParityII(new int[] {4,2,5,7}));
+		//ListNode test = new ListNode();
+		
+		
 	}
 }
