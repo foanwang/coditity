@@ -118,8 +118,99 @@ public class leecode {
    		}
    		return selflist;
     }
+    //偶奇偶奇
+   	public int[] sortArrayByParityII(int[] A) {
+   		int evenindex =  0;
+   		int oddindex = 1;
+   		int[]  reply  = new int[A.length];
+   		for(int i = 0; i < A.length; i++) {
+   			if(A[i] %2== 0) {
+   				reply[evenindex] = A[i];
+   				evenindex+=2;
+   			}else {
+   				reply[oddindex] = A[i];
+   				oddindex+=2;
+   			}
+   		}
+   		return reply;
+    }
+   	public int[][] transpose(int[][] A) {
+   		int[][] reply  = new int[A[0].length][A.length];
+   		for(int i = 0; i < A.length; i++) {
+   			for(int j = 0; j < A[0].length;j++) {
+   				reply[j][i] = A[i][j];
+   			}
+   		}
+   		return reply;
+    }
+   	
+   	public int smallestRangeI(int[] A, int K) {
+   		
+   		return 1;
+    }
+   	class Node {
+   	    public int val;
+   	    public List<Node> children;
+
+   	    public Node() {}
+
+   	    public Node(int _val,List<Node> _children) {
+   	        val = _val;
+   	        children = _children;
+   	    }
+   	};
+   	
+   	public List<Integer> preorder(Node root) {
+   		List<Integer> reply = new ArrayList<Integer>();
+   		if(root==null) {
+   			return reply;
+   		}
+   		reply.add(root.val);
+   		List<Node> childrenlist =root.children;
+   		for(int i  = 0; i < childrenlist.size(); i++) {
+   			reply = addValueBypreorder(childrenlist.get(i), reply);
+   		}
+   		return reply;
+    }
+   	public List<Integer> addValueBypreorder(Node root, List<Integer> list){
+   		if(root!=null) {
+   			list.add(root.val);
+   		}
+   		if(null !=root.children) {	
+	   		for(int i  = 0; i < root.children.size(); i++) {
+	   			list = addValueBypreorder(root.children.get(i), list);
+	   		}
+   		}
+   		return list;
+   	}
+   	
+    public List<Integer> postorder(Node root) {
+    	List<Integer> reply = new ArrayList<Integer>();
+   		if(root==null) {
+   			return reply;
+   		}
+   		List<Node> childrenlist =root.children;
+   		for(int i  = 0; i < childrenlist.size(); i++) {
+   			reply = addValueBypreorder(childrenlist.get(i), reply);
+   		}
+   		reply.add(root.val);
+   		return reply;
+    }
     
-    
+	public List<Integer> addValueByPostorder(Node root, List<Integer> list){
+   		if(root==null) {
+   			return list;
+   		}
+   		if(root.children==null) {
+   			list.add(root.val);
+   		}else{
+			for(int i  = 0; i < root.children.size(); i++) {
+				list = addValueByPostorder(root.children.get(i), list);
+			}
+   		}
+   		return list;
+   	}
+   	
     public static void ShowfunctionForInt(int[] input) {
     	int count = 0;
     	for(int temp: input) {
@@ -139,6 +230,6 @@ public class leecode {
 	public static void main(String[] args) {
 		leecode temp = new leecode();
 		Integer[] intarry = new Integer[]{3,1,2,4};
-		System.out.println("reply:"+temp.selfDividingNumbers(1, 22));
+		//ShowfunctionForInt(temp.sortArrayByParityII(new int[] {4,2,5,7}));
 	}
 }
