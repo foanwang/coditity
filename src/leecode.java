@@ -223,6 +223,29 @@ public class leecode {
     	return reply;
     }
  
+    public String reverseWords(String s) {
+    	String[] reply = s.split(" ");
+    	final StringBuilder result = new StringBuilder();
+    	StringBuilder word = new StringBuilder();
+    	Showfunction(reply);
+    	for(String temp: reply) {
+    		word = new StringBuilder();
+    		word.append(temp);
+    		word.reverse();
+    		result.append(word);
+    		result.append(" ");
+    	}
+    	result.delete(result.length()-1, result.length());
+    	return result.toString();
+    }
+    
+    public int[] numberOfLines(int[] widths, String S) {
+    	int[] reply = new int[widths.length];
+    	
+    	return reply;
+    }
+    
+    
     public class TreeNode {
     	int val;
     	TreeNode left;
@@ -233,7 +256,8 @@ public class leecode {
     public class ListNode {
     	int val;
     	ListNode next;
-    	ListNode(){};    	ListNode(int x) { val = x; }
+    	ListNode(){};    	
+    	ListNode(int x) { val = x; }
     }
    	
     public static void ShowfunctionForInt(int[] input) {
@@ -255,7 +279,7 @@ public class leecode {
 	public static void main(String[] args) {
 		leecode temp = new leecode();
 		Integer[] intarry = new Integer[]{3,1,2,4};
-		//ListNode test = new ListNode();
+		System.out.println(temp.reverseWords("Let's take LeetCode contest"));
 		
 		
 	}
